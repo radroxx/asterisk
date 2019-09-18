@@ -188,17 +188,19 @@ RUN	set -x \
 # Postinstall
 	&& addgroup --system --gid 1000 asterisk \
 	&& adduser --system --uid 1000 --ingroup asterisk --quiet -home /var/lib/asterisk --no-create-home --disabled-login --gecos "Asterisk PBX daemon" asterisk \
-	&& chown -R asterisk:asterisk /var/*/asterisk \
+	&& chown -R asterisk:dialout /var/*/asterisk \
 	&& chmod -R 750 /var/spool/asterisk \
+# Optional packages
+    && apt install sendemail libnet-ssleay-perl libio-socket-ssl-perl
 	&& rm -rf /var/lib/apt/lists/*
 
-EXPOSE 5038 8088 5060/udp 5061/udp 5062/udp
+EXPOSE 5060/udp 5061/udp 5062/udp
 
 STOPSIGNAL SIGTERM
 
 WORKDIR /var/lib/asterisk/
-HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD /usr/sbin/asterisk -rx "core show sysinfo"
+HEALTHCHECK --interval=10s --timeout=10s --retries=3 CMD /usr/sbin/asterisk -rx "core show sysinfo"
 
-ENTRYPOINT ["/usr/sbin/asterisk","-f","-n","-Uasterisk","-Gasterisk"]
+ENTRYPOINT ["/usr/sbin/asterisk","-f","-n","-Uasterisk","-Gdialout"]
 
 CMD ["-v"]
