@@ -1,8 +1,6 @@
 FROM debian:buster
 
-LABEL maintainer="Radroxxx <radroxxx@gmail.com>"
-
-ENV ASTERISK_VERSION certified/13.21-cert4
+ENV ASTERISK_VERSION certified/13.21-cert6
 ENV ASTERIS_VERSION_DONGLE 13.21
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -191,7 +189,7 @@ RUN	set -x \
 	&& chown -R asterisk:dialout /var/*/asterisk \
 	&& chmod -R 750 /var/spool/asterisk \
 # Optional packages
-    && apt install sendemail libnet-ssleay-perl libio-socket-ssl-perl
+    && apt-get install sendemail libnet-ssleay-perl libio-socket-ssl-perl
 	&& rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5060/udp 5061/udp 5062/udp
