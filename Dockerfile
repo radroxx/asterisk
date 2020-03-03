@@ -189,7 +189,7 @@ RUN	set -x \
 	&& chown -R asterisk:dialout /var/*/asterisk \
 	&& chmod -R 750 /var/spool/asterisk \
 # Optional packages
-    	&& apt-get install sendemail libnet-ssleay-perl libio-socket-ssl-perl \
+    	&& apt-get install -y --no-install-recommends sendemail libnet-ssleay-perl libio-socket-ssl-perl \
 	&& rm -rf /var/lib/apt/lists/*
 
 EXPOSE 5060/udp 5061/udp 5062/udp
