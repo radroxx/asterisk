@@ -2,10 +2,9 @@
 Asterisk + chan_dongle in docker.
 
 **Usage example**
-  * Clone the repository.
   * Build docker image.
     ```sh
-    docker build -t asterisk .
+    docker build -t asterisk https://raw.githubusercontent.com/dec0dOS/asterisk/master/Dockerfile
     ```
   * Create and run persistent container
     ```sh
