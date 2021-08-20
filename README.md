@@ -1,18 +1,26 @@
-# asterisk
-Asterisk + chan_dongle in docker.
+# Asterisk RPi + chan_dongle
 
-**Usage example**
-  * Build docker image.
-    ```sh
-    docker build -t asterisk https://raw.githubusercontent.com/dec0dOS/asterisk/master/Dockerfile
-    ```
-    or pull from docker hub
-    ```sh
-    docker pull dec0dos/asterisk-rpi:latest
-    ```
-  * Create and run persistent container
-    ```sh
-    docker run --name asterisk-cont --network host --privileged -v /dev:/dev -v /etc/asterisk:/etc/asterisk -dit --restart unless-stopped asterisk
-    ```
+[![Build and push](https://github.com/dec0dos/docker-asterisk-rpi/actions/workflows/build_and_push.yml/badge.svg)](https://github.com/dec0dos/docker-asterisk-rpi/actions/workflows/build_and_push.yml)
 
+This repository contains docker configuration and provides images for [Asterisk](https://www.asterisk.org/) with [chan_dongle](https://github.com/wdoekes/asterisk-chan-dongle).
 
+Docker repository: [dec0dos/asterisk-rpi](https://hub.docker.com/r/dec0dos/asterisk-rpi)
+
+GitHub repository: [dec0dos/docker-asterisk-rpi](https://github.com/dec0dos/docker-asterisk-rpi/)
+
+# Basic usage
+
+## Using images from hub.docker.com
+
+Dockerhub contains docker images with compiled binaries for all available ARM platforms of Raspberry Pi: armv6, armv7, arm64.
+
+To start container run the following command:
+
+```sh
+docker run -dit --name asterisk --volume /etc/asterisk:/etc/asterisk --network host --device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyUSB1:/dev/ttyUSB1 --device /dev/ttyUSB2:/dev/ttyUSB2 --device /dev/ttyUSB3:/dev/ttyUSB3 --device /dev/ttyUSB4:/dev/ttyUSB4 --restart unless-stopped dec0dos/asterisk-rpi:master
+```
+
+where:
+
+- `/etc/asterisk` is a directory with asterisk configuration.
+- `--device /dev/ttyUSBX:/dev/ttyUSBX` is a path to the USB devices of Huawei UMTS card

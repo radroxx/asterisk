@@ -46,6 +46,7 @@ RUN	set -x \
 		--enable format_ogg_vorbis \
 		--enable format_h264 \
 		--enable format_h263 \
+		--enable func_base64 \
 		--enable func_callerid \
 		--enable func_cdr \
 		--enable func_channel \
