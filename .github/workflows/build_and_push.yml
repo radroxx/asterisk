@@ -43,6 +43,6 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/armhf
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/asterisk-rpi:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/asterisk-rpi:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
