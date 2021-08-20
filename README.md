@@ -1,12 +1,12 @@
 # Asterisk RPi + chan_dongle
 
-[![Build and push](https://github.com/dec0dos/docker-asterisk-rpi/actions/workflows/build_and_push.yml/badge.svg)](https://github.com/dec0dos/docker-asterisk-rpi/actions/workflows/build_and_push.yml)
+[![Build and push](https://github.com/dec0dos/asterisk-docker/actions/workflows/build_and_push.yml/badge.svg)](https://github.com/dec0dos/asterisk-docker/actions/workflows/build_and_push.yml)
 
 This repository contains docker configuration and provides images for [Asterisk](https://www.asterisk.org/) with [chan_dongle](https://github.com/wdoekes/asterisk-chan-dongle).
 
 Docker repository: [dec0dos/asterisk-rpi](https://hub.docker.com/r/dec0dos/asterisk-rpi)
 
-GitHub repository: [dec0dos/docker-asterisk-rpi](https://github.com/dec0dos/docker-asterisk-rpi/)
+GitHub repository: [dec0dos/asterisk-docker](https://github.com/dec0dos/asterisk-docker/)
 
 # Basic usage
 
