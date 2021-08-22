@@ -1,4 +1,4 @@
-# Asterisk RPi + chan_dongle
+# Asterisk + chan_dongle
 
 [![Build and push](https://github.com/dec0dos/asterisk-docker/actions/workflows/build_and_push.yml/badge.svg)](https://github.com/dec0dos/asterisk-docker/actions/workflows/build_and_push.yml)
 
@@ -12,7 +12,7 @@ GitHub repository: [dec0dos/asterisk-docker](https://github.com/dec0dos/asterisk
 
 ## Using images from hub.docker.com
 
-Dockerhub contains docker images with compiled binaries for all available ARM platforms of Raspberry Pi: armv6, armv7, arm64.
+Dockerhub contains docker images with compiled binaries for the following platforms: amd64, arm64, armv7.
 
 To start container run the following command:
 
