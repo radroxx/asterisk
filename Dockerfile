@@ -14,7 +14,7 @@ RUN	set -x \
 	&& cd /usr/local/src/asterisk \
 	&& yes | contrib/scripts/install_prereq install \
 	&& contrib/scripts/install_prereq test \
-	&& ./bootstrap.sh && ./configure \
+	&& ./bootstrap.sh && ./configure --with-pjproject-bundled \
 	&& make menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
