@@ -24,3 +24,11 @@ where:
 
 - `/etc/asterisk` is a directory with asterisk configuration.
 - `--device /dev/ttyUSBX:/dev/ttyUSBX` is a path to the USB devices of Huawei UMTS card
+
+## Build yourself
+
+To build the image locally run:
+
+```sh
+docker build -t asterisk https://raw.githubusercontent.com/dec0dos/asterisk-docker/master/Dockerfile
+```
