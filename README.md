@@ -17,7 +17,7 @@ Dockerhub contains docker images with compiled binaries for the following platfo
 To start container run the following command:
 
 ```sh
-docker run -dit --name asterisk --volume /etc/asterisk:/etc/asterisk --network host --device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyUSB1:/dev/ttyUSB1 --device /dev/ttyUSB2:/dev/ttyUSB2 --device /dev/ttyUSB3:/dev/ttyUSB3 --device /dev/ttyUSB4:/dev/ttyUSB4 --restart unless-stopped dec0dos/asterisk-rpi:master
+docker run -dit --name asterisk --volume /etc/asterisk:/etc/asterisk --network host --device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyUSB1:/dev/ttyUSB1 --device /dev/ttyUSB2:/dev/ttyUSB2 --device /dev/ttyUSB3:/dev/ttyUSB3 --device /dev/ttyUSB4:/dev/ttyUSB4 --restart unless-stopped dec0dos/asterisk-rpi:latest
 ```
 
 where:
