@@ -1,7 +1,7 @@
 FROM debian:buster
 
 ENV ASTERISK_VERSION certified/13.21-cert6
-ENV ASTERIS_VERSION_DONGLE 13.21
+ENV ASTERISK_VERSION_DONGLE 13.21
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN	set -x \
@@ -180,7 +180,7 @@ RUN	set -x \
 	&& make clean \
 # Install chan-dongle
 	&& cd /usr/local/src/chan-dongle \
-	&& ./bootstrap && ./configure --with-astversion=${ASTERIS_VERSION_DONGLE} \
+	&& ./bootstrap && ./configure --with-astversion=${ASTERISK_VERSION_DONGLE} \
 	&& make all \
 	&& make install \
 	&& make distclean \
