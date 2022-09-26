@@ -1,9 +1,7 @@
 FROM debian:buster
 
-LABEL maintainer="Radroxxx <radroxxx@gmail.com>"
-
-ENV ASTERISK_VERSION certified/13.21-cert4
-ENV ASTERIS_VERSION_DONGLE 13.21
+ENV ASTERISK_VERSION certified/13.21-cert6
+ENV ASTERISK_VERSION_DONGLE 13.21
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN	set -x \
@@ -16,7 +14,7 @@ RUN	set -x \
 	&& cd /usr/local/src/asterisk \
 	&& yes | contrib/scripts/install_prereq install \
 	&& contrib/scripts/install_prereq test \
-	&& ./bootstrap.sh && ./configure \
+	&& ./bootstrap.sh && ./configure --with-pjproject-bundled \
 	&& make menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
@@ -48,6 +46,7 @@ RUN	set -x \
 		--enable format_ogg_vorbis \
 		--enable format_h264 \
 		--enable format_h263 \
+		--enable func_base64 \
 		--enable func_callerid \
 		--enable func_cdr \
 		--enable func_channel \
@@ -181,24 +180,26 @@ RUN	set -x \
 	&& make clean \
 # Install chan-dongle
 	&& cd /usr/local/src/chan-dongle \
-	&& ./bootstrap && ./configure --with-astversion=${ASTERIS_VERSION_DONGLE} \
+	&& ./bootstrap && ./configure --with-astversion=${ASTERISK_VERSION_DONGLE} \
 	&& make all \
 	&& make install \
 	&& make distclean \
 # Postinstall
 	&& addgroup --system --gid 1000 asterisk \
 	&& adduser --system --uid 1000 --ingroup asterisk --quiet -home /var/lib/asterisk --no-create-home --disabled-login --gecos "Asterisk PBX daemon" asterisk \
-	&& chown -R asterisk:asterisk /var/*/asterisk \
+	&& chown -R asterisk:dialout /var/*/asterisk \
 	&& chmod -R 750 /var/spool/asterisk \
+# Optional packages
+    	&& apt-get install -y --no-install-recommends sendemail libnet-ssleay-perl libio-socket-ssl-perl \
 	&& rm -rf /var/lib/apt/lists/*
 
-EXPOSE 5038 8088 5060/udp 5061/udp 5062/udp
+EXPOSE 5060/udp 5061/udp 5062/udp
 
 STOPSIGNAL SIGTERM
 
 WORKDIR /var/lib/asterisk/
-HEALTHCHECK --interval=5s --timeout=10s --retries=3 CMD /usr/sbin/asterisk -rx "core show sysinfo"
+HEALTHCHECK --interval=10s --timeout=10s --retries=3 CMD /usr/sbin/asterisk -rx "core show sysinfo"
 
-ENTRYPOINT ["/usr/sbin/asterisk","-f","-n","-Uasterisk","-Gasterisk"]
+ENTRYPOINT ["/usr/sbin/asterisk","-f","-n","-Uasterisk","-Gdialout"]
 
 CMD ["-v"]
